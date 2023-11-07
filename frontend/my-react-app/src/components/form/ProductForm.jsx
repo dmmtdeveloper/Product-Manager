@@ -18,7 +18,6 @@ const ProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(product.title, product.description, product.value);
   };
 
   const { title, price, description } = product;
