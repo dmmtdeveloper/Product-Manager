@@ -3,7 +3,11 @@ import CreateButton from "../buttons/create/createButton";
 import axios from "axios";
 
 const ProductForm = () => {
-  const [product, setProduct] = useState("");
+  const [product, setProduct] = useState({
+    title: "",
+    price: "",
+    description: "",
+  });
 
   const { title, price, description } = product;
 
@@ -15,7 +19,7 @@ const ProductForm = () => {
   };
 
   const handleForm = async () => {
-    if (title != "" && price != "" && description != "") {
+    if (title !== "" && price !== "" && description !== "") {
       const dataProduct = {
         title: title,
         price: price,
@@ -27,7 +31,7 @@ const ProductForm = () => {
           "http://localhost:8080/api/products/create",
           dataProduct
         );
-        if (result.status == 200) {
+        if (result.status === 200) {
           alert("Producto creado");
         }
       } catch (e) {
@@ -53,7 +57,7 @@ const ProductForm = () => {
         <input
           className="rounded-2xl border p-3 capitalize"
           value={price}
-          type="number"
+          type="text"
           placeholder="price"
           name="price"
           onChange={handleChange}

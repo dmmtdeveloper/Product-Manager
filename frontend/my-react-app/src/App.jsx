@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <>
+    
       <div className=" flex h-screen flex-col items-center justify-center gap-5">
         <ProductManagerTitle value="Product Manager" />
         <BrowserRouter>
@@ -13,7 +13,7 @@ const App = () => {
           </Routes>
         </BrowserRouter>
       </div>
-    </>
+    
   );
 };
 
