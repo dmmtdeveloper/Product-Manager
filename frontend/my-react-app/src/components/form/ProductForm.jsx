@@ -1,35 +1,45 @@
 import { useState } from "react";
-import { useEffect } from "react";
 import CreateButton from "../buttons/create/createButton";
 import axios from "axios";
 
 const ProductForm = () => {
-  const [product, setproduct] = useState("");
-
-  //Llamar a nuestro API para mostrar la información
-  useEffect(() => {
-    handleListApi();
-  }, []);
-
-  const handleListApi = async () => {
-    const result = await axios.get("http://localhost:8080/api/products/read");
-    console.log(result.data);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const [product, setProduct] = useState("");
 
   const { title, price, description } = product;
+
   const handleChange = (e) => {
-    setproduct({
+    setProduct({
       ...product,
       [e.target.name]: e.target.value,
     });
   };
 
+  const handleForm = async () => {
+    if (title != "" && price != "" && description != "") {
+      const dataProduct = {
+        title: title,
+        price: price,
+        description: description,
+      };
+
+      try {
+        const result = await axios.post(
+          "http://localhost:8080/api/products/create",
+          dataProduct
+        );
+        if (result.status == 200) {
+          alert("Producto creado");
+        }
+      } catch (e) {
+        alert(e.response.data.message);
+      }
+    } else {
+      alert("Llene el formulario");
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center">
       <div className="flex flex-col gap-1" action="">
         <input
           className="rounded-2xl border p-3 capitalize"
@@ -43,7 +53,7 @@ const ProductForm = () => {
         <input
           className="rounded-2xl border p-3 capitalize"
           value={price}
-          type="text"
+          type="number"
           placeholder="price"
           name="price"
           onChange={handleChange}
@@ -57,9 +67,9 @@ const ProductForm = () => {
           name="description"
           onChange={handleChange}
         />
-        <CreateButton handleListApi={handleListApi} value="create" />
+        <CreateButton handleForm={handleForm} value="create" />
       </div>
-    </form>
+    </div>
   );
 };
 

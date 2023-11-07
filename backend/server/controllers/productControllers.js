@@ -1,9 +1,16 @@
 import { Product } from "../models/productModels.js";
 
 const productCreate = async (req, res) => {
-  const productData = req.body;
-  const productPost = await Product.create(productData);
-  res.status(200).json(productPost);
+  try {
+    const productData = req.body;
+    const productPost = await Product.create(productData);
+    res.status(200).json(productPost);
+  } catch (e) {
+    console.log("ERROR: " + e);
+    res.status(300).json({
+      message: e.message,
+    });
+  }
 };
 
 const productRead = async (req, res) => {
@@ -19,10 +26,17 @@ const productReadOne = async (req, res) => {
 };
 
 const productUpdate = async (req, res) => {
-  const productId = req.params.id;
-  const productData = req.body;
-  await Product.findByIdAndUpdate(productId, productData);
-  res.status(200).json();
+  try {
+    const productId = req.params.id;
+    const productData = req.body;
+    await Product.findByIdAndUpdate(productId, productData, {runValidators:true});
+    res.status(200).json();
+  } catch (e) {
+    console.log("EROR: " + e);
+    res.status(300).json({
+      message: e.message,
+    });
+  }
 };
 
 const productDelete = async (req, res) => {
