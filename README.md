@@ -1,3 +1,3 @@
-# Product-Manager-Parte 1
+# Product-Manager-Parte 2
  Tarea Core - Bootcamp Coding Dojo
 
