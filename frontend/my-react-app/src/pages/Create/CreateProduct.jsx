@@ -51,7 +51,7 @@ const CreateProduct = () => {
         className="flex flex-col justify-center gap-4"
         onSubmit={handleSubmit}
       >
-        <h1 className="text-2xl">Product Manager</h1>
+        <h1 className="text-4xl">Product Manager</h1>
 
         <div className="flex flex-col gap-1">
           <input
@@ -85,7 +85,7 @@ const CreateProduct = () => {
             Create
           </button>
 
-          <h2>List Product</h2>
+          <h2 className="text-center mt-4 text-2xl">List Product</h2>
           {listProducts.map((product, index) => {
             return (
               <div key={index}>
