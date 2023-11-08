@@ -15,7 +15,7 @@ const DetailProducts = () => {
   }, []);
 
   const callProductApi = async () => {
-    let url = "http://localhost:8080/api/products/readOne/"+productIdData;
+    let url = "http://localhost:8080/api/products/readOne/" + productIdData;
     url = url.replace(" ", "");
 
     try {
